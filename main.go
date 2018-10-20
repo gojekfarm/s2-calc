@@ -16,6 +16,9 @@ func main() {
 	calculateS2IDCallback := js.NewCallback(func(args []js.Value) {
 		calculateS2ID()
 	})
+	calculateLatLngCallback := js.NewCallback(func(args []js.Value) {
+		calculateLatLng()
+	})
 
 	js.Global().Get("document").
 		Call("getElementById", "latitude").
@@ -37,6 +40,13 @@ func main() {
 	js.Global().Get("document").
 		Call("getElementById", "level").
 		Call("addEventListener", "keyup", calculateS2IDCallback)
+
+	js.Global().Get("document").
+		Call("getElementById", "s2id").
+		Call("addEventListener", "change", calculateLatLngCallback)
+	js.Global().Get("document").
+		Call("getElementById", "s2id").
+		Call("addEventListener", "keyup", calculateLatLngCallback)
 
 	<-done
 }
@@ -79,4 +89,36 @@ func calculateS2ID() {
 	js.Global().Get("document").
 		Call("getElementById", "s2id").
 		Set("value", s2ID)
+}
+
+func calculateLatLng() {
+	s2idStr := js.Global().Get("document").
+		Call("getElementById", "s2id").
+		Get("value").String()
+
+	if s2idStr == "" {
+		return
+	}
+
+	s2idInt, err := strconv.Atoi(s2idStr)
+	if err != nil {
+		fmt.Println("Failed to parse s2id")
+		return
+	}
+
+	s2Cell := s2.CellID(s2idInt)
+	ll := s2Cell.LatLng()
+	latitude := fmt.Sprintf("%v", ll.Lat)
+	longitude := fmt.Sprintf("%v", ll.Lng)
+	level := s2Cell.Level()
+
+	js.Global().Get("document").
+		Call("getElementById", "latitude").
+		Set("value", latitude)
+	js.Global().Get("document").
+		Call("getElementById", "longitude").
+		Set("value", longitude)
+	js.Global().Get("document").
+		Call("getElementById", "level").
+		Set("value", level)
 }
