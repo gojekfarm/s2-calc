@@ -1,5 +1,5 @@
 # S2 Geometry Calculator
-A user-friendly web interface for converting between GPS coordinates, and [S2 cells]('http://s2geometry.io/').
+A user-friendly web interface for converting between GPS coordinates, and [S2 cells](http://s2geometry.io/).
 
 ## Installation
 Requirements: >= Go 1.11
