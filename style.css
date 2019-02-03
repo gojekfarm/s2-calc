@@ -1,0 +1,50 @@
+body {
+  padding: 0 2rem;
+  margin: 3rem 25rem;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0;
+    margin: 1rem;
+  }
+}
+
+.nes-container:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.form > .nes-field:not(:last-child) {
+  margin-bottom: 1.25rem;
+}
+
+.footer {
+  text-align: center;
+}
+.footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.github-link {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+  display: flex;
+  height: 100px;
+  color: #333;
+  text-decoration: none;
+}
+.github-link:hover {
+  text-decoration: none;
+}
+.github-link > p.nes-balloon {
+  align-self: flex-start;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  color: #333;
+}
+.github-link > i.nes-octocat {
+  align-self: flex-end;
+}
