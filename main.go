@@ -13,11 +13,14 @@ func main() {
 
 	done := make(chan struct{})
 
-	calculateS2IDCallback := js.NewCallback(func(args []js.Value) {
+	calculateS2IDCallback := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		calculateS2ID()
+		return nil
 	})
-	calculateLatLngCallback := js.NewCallback(func(args []js.Value) {
+
+	calculateLatLngCallback := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		calculateLatLng()
+		return nil
 	})
 
 	js.Global().Get("document").

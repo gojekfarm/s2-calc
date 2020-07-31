@@ -23,7 +23,7 @@ go get -u github.com/shurcooL/goexec
 Install dependencies
 
 ```bash
-make init-deps get-deps
+make get-deps
 ```
 
 Build and run server
