@@ -1,10 +1,7 @@
 all: build-wasm run
 
-init-deps:
-	@dep init -v
-
 get-deps:
-	@dep ensure -v
+	@go mod tidy -v
 
 build-wasm:
 	@GOOS=js GOARCH=wasm go build -o main.wasm
