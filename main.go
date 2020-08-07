@@ -8,6 +8,15 @@ import (
 	"github.com/golang/geo/s2"
 )
 
+const (
+	googleMapsDefaultZoom = 14
+	googleMapsLinkFormat  = "https://www.google.com.sg/maps/@%f,%f,%dz"
+)
+
+func googleMapsLink(latitude, longitude float64) string {
+	return fmt.Sprintf(googleMapsLinkFormat, latitude, longitude, googleMapsDefaultZoom)
+}
+
 func main() {
 	calculateS2ID()
 
@@ -92,6 +101,10 @@ func calculateS2ID() {
 	js.Global().Get("document").
 		Call("getElementById", "s2id").
 		Set("value", s2ID)
+
+	js.Global().Get("document").
+		Call("getElementById", "open-google-maps").
+		Set("href", googleMapsLink(latitude, longitude))
 }
 
 func calculateLatLng() {
@@ -124,4 +137,8 @@ func calculateLatLng() {
 	js.Global().Get("document").
 		Call("getElementById", "level").
 		Set("value", level)
+
+	js.Global().Get("document").
+		Call("getElementById", "open-google-maps").
+		Set("href", googleMapsLink(ll.Lat.Degrees(), ll.Lng.Degrees()))
 }
